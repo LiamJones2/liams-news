@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
+import Comments from '../ Comments/Comments';
 
 function Article() {
     const { article_id } = useParams()
@@ -47,6 +48,7 @@ function Article() {
             <h2>Votes: {article.votes}</h2>
             <img src={article.article_img_url} alt="" />
             <p>{article.body}</p>
+            <Comments article_id={article.article_id} />
         </div>
     )
 }
