@@ -47,7 +47,7 @@ function ArticlesList({ sortBy, order }) {
                         <img src={article.article_img_url} alt="" />
                         </div>
                         <div className='article-comments'>
-                        <Link to={`/article/${article.article_id}#comments`}><button>Comments : {article.comment_count}</button></Link>
+                        <Link to={`/article/${article.article_id}`}><button>Comments : {article.comment_count}</button></Link>
                         </div>
                         <div className='article-read'>
                         <Link to={`/article/${article.article_id}`}><button>See</button></Link>

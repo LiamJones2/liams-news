@@ -43,7 +43,7 @@ function Article() {
     }
 
     return (
-        <div className='article-list-div'>
+        <div className='article-single'>
             <h1>{article.title}</h1>
             <h2>Votes: {article.votes}</h2>
             <img src={article.article_img_url} alt="" />
