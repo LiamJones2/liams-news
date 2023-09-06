@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../../UserContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { upvoteArticle, downvoteArticle } from '../../Votes/Votes';
 
 function ArticlesList({ sortBy, order }) {
     const [articlesList, setArticlesList] = useState([])
@@ -37,9 +38,11 @@ function ArticlesList({ sortBy, order }) {
                         <div>
                         <h1 className='article-title'>{article.title}</h1>
                         </div>
-                            <div className='article-votes'>
+                        <div className='article-votes'>
                             <h2 id={`article${article.article_id}votes`}>Votes: {article.votes}</h2>
-                            </div>
+                            <button onClick={() => upvoteArticle(article.article_id)}>Plus</button>
+                            <button onClick={() => downvoteArticle(article.article_id)}>Minus</button>
+                        </div>
                         <div className='article-image'>
                         <img src={article.article_img_url} alt="" />
                         </div>

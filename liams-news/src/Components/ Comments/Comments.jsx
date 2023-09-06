@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { NewCommentSection } from './Components/Comments'
 
 
 function Comments({ article_id }) {
@@ -34,6 +35,7 @@ function Comments({ article_id }) {
 
     return (
         <div>
+            <NewCommentSection user={user} article_id={article_id} setUpdating={setUpdating} setCommentsList={setCommentsList} commentsList={commentsList}/>
             <div className='comment-list-div'>
                 {
                     commentsList.map((comment, i) => {
