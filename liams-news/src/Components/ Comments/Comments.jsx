@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-import { NewCommentSection } from './CommentFunctions/Comments'
+import { NewCommentSection, deleteCommentToArticle } from './CommentFunctions/Comments'
 
 
 function Comments({ article_id }) {
@@ -11,6 +11,12 @@ function Comments({ article_id }) {
     const [commentsList, setCommentsList] = useState([])
     const [loading, setLoading] = useState(false)
     const [updating, setUpdating] = useState(false)
+
+    useEffect(() => {
+        setLoading(false)
+        setUpdating(false)
+
+    }, [updating])
 
     useEffect(() => {
         setLoading(true)
@@ -26,7 +32,7 @@ function Comments({ article_id }) {
                     setLoading(false)
                 })
         }
-    }, [updating])
+    }, [])
 
 
     if (loading) return (<div><h1>Loading</h1></div>)
@@ -41,7 +47,8 @@ function Comments({ article_id }) {
                         return <div key={comment.comment_id} className='comment-card'>
                             <h1>{comment.author}</h1>
                             <h2>Votes: {comment.votes}</h2>
-                            <p>{comment.body}</p>                       
+                            <p>{comment.body}</p>  
+                            {comment.author === user.username ? (<button onClick={(event) => deleteCommentToArticle(comment, setUpdating, setCommentsList, commentsList, event.target)}>Delete your comment</button>) : null}                     
                         </div>
                     })
                 }
