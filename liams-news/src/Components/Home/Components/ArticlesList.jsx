@@ -11,11 +11,7 @@ function ArticlesList({ sortBy, order }) {
     useEffect(() => {
         setLoading(true)
 
-        let searchURL = `https://nc-news-liam.onrender.com/api/articles`
-
-        searchURL += `?sort_by=${sortBy.database}`
-        searchURL += `&order=${order}`
-
+        const searchURL = `https://nc-news-liam.onrender.com/api/articles?sort_by=${sortBy.apiAccessKey}&order=${order}`
 
         axios.get(searchURL)
             .then(function ({ data }) {

@@ -37,7 +37,8 @@ function Article() {
     if (error) {
         return (
             <div>
-                <h1>That article does not exist</h1>
+                <h1>Oops. There was an error</h1>
+                <h1>That article might not exist</h1>
             </div>
         )
     }

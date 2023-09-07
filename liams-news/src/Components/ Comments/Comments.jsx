@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-import { NewCommentSection } from './Components/Comments'
+import { NewCommentSection } from './CommentFunctions/Comments'
 
 
 function Comments({ article_id }) {
@@ -15,10 +15,9 @@ function Comments({ article_id }) {
     useEffect(() => {
         setLoading(true)
         setUpdating(false)
-        let searchURL = `https://nc-news-liam.onrender.com/api/articles/${article_id}/comments`
 
         if (article_id) {
-            axios.get(searchURL)
+            axios.get(`https://nc-news-liam.onrender.com/api/articles/${article_id}/comments`)
                 .then(function ({ data }) {
                     return data
                 })
@@ -38,8 +37,8 @@ function Comments({ article_id }) {
             <NewCommentSection user={user} article_id={article_id} setUpdating={setUpdating} setCommentsList={setCommentsList} commentsList={commentsList}/>
             <div className='comment-list-div'>
                 {
-                    commentsList.map((comment, i) => {
-                        return <div key={i} className='comment-card'>
+                    commentsList.map((comment) => {
+                        return <div key={comment.comment_id} className='comment-card'>
                             <h1>{comment.author}</h1>
                             <h2>Votes: {comment.votes}</h2>
                             <p>{comment.body}</p>                       

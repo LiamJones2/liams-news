@@ -2,19 +2,25 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
-import {attemptLoginDatabase} from './Components/LoginSignup'
+import { attemptLoginDatabase } from './Components/LoginSignup'
 
 function LoginSignup() {
-    const {setUser} = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
 
     const [wrongLogin, setWrongLogin] = useState(false)
+    const [loginValue, setLoginValue] = useState("")
 
     const navigate = useNavigate()
 
+    function CheckForWrongLogin() {
+        if(wrongLogin) return ( <><h1>Wrong login</h1></> )
+        else return
+    }
+
     async function attemptToLogin() {
-        const returnedUser = await attemptLoginDatabase()
-        if(returnedUser.username !== undefined) {
-            setUser(returnedUser) 
+        const returnedUser = await attemptLoginDatabase(loginValue)
+        if (returnedUser.username !== undefined) {
+            setUser(returnedUser)
             navigate("/")
         }
         else setWrongLogin(true)
@@ -23,23 +29,12 @@ function LoginSignup() {
     useEffect(() => {
     }, [wrongLogin])
 
-
-    if(wrongLogin) {
-        return (
-            <div className=''>
-                <h1>Wrong login</h1>
-                <h1>Login</h1>
-                <input id='login' type="text" />
-                <button onClick={attemptToLogin}>Login</button>
-                <h1>Signup</h1>
-            </div>
-        )
-    }
-
     return (
         <div className=''>
+            <CheckForWrongLogin />
             <h1>Login</h1>
-            <input id='login' type="text" />
+            <input id='login' type="text" onChange={(event) =>
+                setLoginValue(event.target.value)} />
             <button onClick={attemptToLogin}>Login</button>
             <h1>Signup</h1>
         </div>
