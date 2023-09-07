@@ -13,6 +13,12 @@ function Comments({ article_id }) {
     const [updating, setUpdating] = useState(false)
 
     useEffect(() => {
+        setLoading(false)
+        setUpdating(false)
+
+    }, [updating])
+
+    useEffect(() => {
         setLoading(true)
         setUpdating(false)
 
@@ -26,7 +32,7 @@ function Comments({ article_id }) {
                     setLoading(false)
                 })
         }
-    }, [updating])
+    }, [])
 
 
     if (loading) return (<div><h1>Loading</h1></div>)
