@@ -77,10 +77,23 @@ grid-template-columns: repeat(4, 0.1frfr);
 
 .topic-card {
   background-color: gray;
-  margin: 50px;
+  margin:10px;
+  padding: 10px;
+}
+
+.user-card {
+  background-color: bisque;
+  margin: 10px;
   padding: 1px;
 }
 
+.user-card-div {
+  display: grid;
+}
+
+.error {
+  color: red;
+}
 
 
 @media only screen and (max-width: 600px) {
