@@ -46,7 +46,7 @@ function Comments({ article_id }) {
                     commentsList.map((comment) => {
                         return <div key={comment.comment_id} className='comment-card'>
                             <h1>{comment.author}</h1>
-                            <h2>Votes: {comment.votes}</h2>
+                            {comment.votes !== undefined ? (<h2>Votes: {comment.votes}</h2>) : null}
                             <p>{comment.body}</p>  
                             {comment.author === user.username ? (<button onClick={(event) => deleteCommentToArticle(comment, setUpdating, setCommentsList, commentsList, event.target)}>Delete your comment</button>) : null}                     
                         </div>
