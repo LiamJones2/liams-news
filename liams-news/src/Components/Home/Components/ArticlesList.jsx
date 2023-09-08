@@ -55,7 +55,7 @@ function ArticlesList({ sortBy, order }) {
                         <Link to={`/article/${article.article_id}`}><button>Comments : {article.comment_count}</button></Link>
                         </div>
                         <div className='article-read'>
-                        <Link to={`/article/${article.article_id}`}><button>See</button></Link>
+                        <Link to={`/article/${article.article_id}`}><button>Read</button></Link>
                         </div>
                     </div>
                 })

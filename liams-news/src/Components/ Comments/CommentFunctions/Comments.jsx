@@ -25,6 +25,7 @@ export function deleteCommentToArticle(comment, setUpdating, setCommentsList, co
 export function addNewCommentToArticle(article_id, username, setUpdating, setCommentsList, commentsList, comment, button, setErr) {
     const commentToAdd = comment
     button.textContent = "Adding..."
+    setErr("")
 
     if (commentToAdd !== "" && commentToAdd !== undefined) {
         axios.post(`https://nc-news-liam.onrender.com/api/articles/${article_id}/comments`, {
@@ -36,10 +37,10 @@ export function addNewCommentToArticle(article_id, username, setUpdating, setCom
                 setUpdating(true)
                 toast.success("Comment added successfully!");
                 button.textContent = "Submit comment"
-                setErr("")
+                
             })
             .catch(() => {
-                button.textContent = "Error. Add new comment"
+                button.textContent = "Submit comment"
                 setErr("Sorry there was a problem adding your comment")
             })
     }
