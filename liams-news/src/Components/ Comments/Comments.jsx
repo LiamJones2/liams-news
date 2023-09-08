@@ -11,6 +11,7 @@ function Comments({ article_id }) {
     const [commentsList, setCommentsList] = useState([])
     const [loading, setLoading] = useState(false)
     const [updating, setUpdating] = useState(false)
+    const [err, setErr] = useState(false)
 
     useEffect(() => {
         setLoading(false)
@@ -21,6 +22,7 @@ function Comments({ article_id }) {
     useEffect(() => {
         setLoading(true)
         setUpdating(false)
+        setErr(false)
 
         if (article_id) {
             axios.get(`https://nc-news-liam.onrender.com/api/articles/${article_id}/comments`)
@@ -31,11 +33,21 @@ function Comments({ article_id }) {
                     setCommentsList(response.comments)
                     setLoading(false)
                 })
+                .catch(() => {
+                    setLoading(false)
+                    setErr("Oops. We were unable to get any comments")
+                })
+        }
+        else {
+            setLoading(false)
+            setErr("Oops. We are unable to get that article")
         }
     }, [])
 
 
     if (loading) return (<div><h1>Loading</h1></div>)
+
+    if (err) return (<div><h1>{err}</h1></div>)
 
 
     return (

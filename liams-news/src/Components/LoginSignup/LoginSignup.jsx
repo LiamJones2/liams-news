@@ -13,7 +13,7 @@ function LoginSignup() {
     const navigate = useNavigate()
 
     function CheckForWrongLogin() {
-        if(wrongLogin) return ( <><h1>Wrong login</h1></> )
+        if(wrongLogin) return ( <><h1>{wrongLogin}</h1></> )
         else return
     }
 
@@ -23,7 +23,7 @@ function LoginSignup() {
             setUser(returnedUser)
             navigate("/")
         }
-        else setWrongLogin(true)
+        else setWrongLogin(returnedUser.errMsg)
     }
 
     useEffect(() => {

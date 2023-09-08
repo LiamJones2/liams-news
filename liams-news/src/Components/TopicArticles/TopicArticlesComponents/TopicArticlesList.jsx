@@ -28,8 +28,9 @@ function TopicArticlesList({ topic, sortBy, order }) {
                 setArticlesList(response)
                 setLoading(false)
             })
-            .catch(() => {
-                setError(true)
+            .catch((err) => {
+                if(err.message === "Network Error") setError("We are experiencing network errors currently")
+                else setError("That topic might not exist")
                 setLoading(false)
             })
     }, [topic, sortBy, order])
@@ -41,7 +42,7 @@ function TopicArticlesList({ topic, sortBy, order }) {
         return ( 
         <div>
             <h1>Oops. We encountered an error</h1>
-            <h1>That topic might not exist yet</h1>
+            <h1>{error}</h1>
             <Link to="/topics"><button>See all topics</button></Link>
         </div> )
     }
