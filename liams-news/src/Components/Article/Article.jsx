@@ -25,8 +25,9 @@ function Article() {
                 setArticle(response.article)
                 setLoading(false)
             })
-            .catch(() => {
-                setError(true)
+            .catch((err) => {
+                if(err.message === "Network Error") setError("We are experiencing network errors currently")
+                else setError("That article might not exist")
                 setLoading(false)
             })
     }, [])
@@ -38,7 +39,7 @@ function Article() {
         return (
             <div>
                 <h1>Oops. There was an error</h1>
-                <h1>That article might not exist</h1>
+                <h1>{error}</h1>
             </div>
         )
     }

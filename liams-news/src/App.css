@@ -27,16 +27,18 @@
 
 .article-card {
   background-color: gray;
-  margin: 50px;
+  margin: 75px;
   padding: 1px;
+  border: 3px solid black; 
+    padding-bottom: 30px;
+    margin-bottom: 20px;
   display: grid;
-  grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr;
-grid-template-columns: repeat(4, 0.1frfr);
-  grid-template-areas: 
-  "read title title title"
-  "image image plusminus plusminus"
-  "image image votes votes"
-  "image image comments comments";
+  grid-template-columns: 80% 15%;
+  grid-template-areas:
+    "title read"
+    "image votes"
+    "image comments";
+  gap: 10px;
 }
 
 .article-title {
@@ -61,6 +63,10 @@ grid-template-columns: repeat(4, 0.1frfr);
   grid-area: image;
 }
 
+.article-image img{
+  width:70%;
+}
+
 .article-comments {
   grid-area: comments;
   display: flex;
@@ -77,32 +83,56 @@ grid-template-columns: repeat(4, 0.1frfr);
 
 .topic-card {
   background-color: gray;
-  margin: 50px;
+  margin:10px;
+  padding: 10px;
+}
+
+.user-card {
+  background-color: bisque;
+  margin: 10px;
   padding: 1px;
 }
 
+.user-card-div {
+  display: grid;
+}
+
+.error {
+  color: red;
+}
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
   .article-title {
     font-size: 1rem;
   }
 
   .article-image img{
-    width:100%;
+    width:90%;
   }
 
-  .article-card {
+  .article-list-div {
+    background-color: beige;
     display: grid;
+    padding: 10px;
+  }
+  
+  .article-card {
+    background-color: grey;
+    display: grid;
+    border: 3px solid black; 
+    padding-bottom: 30px;
+    margin-bottom: 20px;
     grid-template-rows: 1fr;
-  grid-template-columns: 30% 70%;
-    grid-template-areas: 
-    "read title title title"
-    "image image image image"
-    "image image image image"
-    "image image image image"
-    "votes votes votes votes"
-    "comments comments comments comments";
+    grid-template-columns: 30% 65%;
+    grid-template-areas:
+      "read title title title"
+      "image image image image"
+      "image image image image"
+      "image image image image"
+      "votes votes votes votes"
+      "comments comments comments comments";
+  
   }
 
   .article-single {
@@ -111,3 +141,4 @@ grid-template-columns: repeat(4, 0.1frfr);
 }
 
 
+ious MSG’s Unlikely Formula For Success

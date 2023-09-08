@@ -7,11 +7,8 @@ export function upvoteArticle(article_id) {
 
     axios.patch(`https://nc-news-liam.onrender.com/api/articles/${article_id}`, {
         inc_votes: 1
-    }).then(() => {
-        window.alert("Article vote plused")
     })
     .catch(() => {
-        window.alert("Error voting")
         articleVotesDocument.textContent = "Votes " + (--articleVotes)
     })
 }
@@ -23,11 +20,8 @@ export function downvoteArticle(article_id) {
 
     axios.patch(`https://nc-news-liam.onrender.com/api/articles/${article_id}`, {
         inc_votes: -1
-    }).then(() => {
-        window.alert("Article vote minused")
     })
     .catch(() => {
         articleVotesDocument.textContent = "Votes " + (++articleVotes)
-        window.alert("Error voting")
     })
 }

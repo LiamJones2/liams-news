@@ -12,7 +12,7 @@ export function deleteCommentToArticle(comment, setUpdating, setCommentsList, co
             if (commentIndex !== -1) {
                 toast.success("Comment deleted successfully!");
                 let updatedComments = [...commentsList]
-                updatedComments[commentIndex] = {body:"Comment deleted successfully!"}
+                updatedComments[commentIndex] = { body: "Comment deleted successfully!" }
                 setCommentsList(updatedComments)
                 setUpdating(true)
             }
@@ -22,23 +22,31 @@ export function deleteCommentToArticle(comment, setUpdating, setCommentsList, co
         })
 }
 
-export function addNewCommentToArticle(article_id, username, setUpdating, setCommentsList, commentsList, comment, button) {
+export function addNewCommentToArticle(article_id, username, setUpdating, setCommentsList, commentsList, comment, button, setErr) {
+    const commentToAdd = comment
     button.textContent = "Adding..."
+    setErr("")
 
-    if (comment !== "") {
+    if (commentToAdd !== "" && commentToAdd !== undefined) {
         axios.post(`https://nc-news-liam.onrender.com/api/articles/${article_id}/comments`, {
             username: username,
-            body: comment
+            body: commentToAdd
         })
             .then(({ data }) => {
                 setCommentsList([data, ...commentsList])
                 setUpdating(true)
                 toast.success("Comment added successfully!");
                 button.textContent = "Submit comment"
+                
             })
             .catch(() => {
-                button.textContent = "Error. Add new comment"
+                button.textContent = "Submit comment"
+                setErr("Sorry there was a problem adding your comment")
             })
+    }
+    else {
+        setErr("Please input text above to make a comment")
+        button.textContent = "Submit comment"
     }
 }
 
@@ -52,16 +60,17 @@ export function NewCommentSection({ user, article_id, setUpdating, setCommentsLi
         )
     }
     else {
-        return (         
+        return (
             <div>
                 <h1>Write a comment</h1>
-                <input id={article_id + "comments"} value={comment} type="text" height="500px" onChange={(event) =>
-                    setComment(event.target.value)} />
+                <input id={article_id + "comments"} value={comment} type="text" height="500px" onChange={(event) => {
+                    setComment(event.target.value);
+                }} />
                 <button onClick={(event) => {
                     addNewCommentToArticle(article_id, user.username, setUpdating, setCommentsList, commentsList, comment, event.target, setErr);
-                    setComment("");
+                    setComment("")
                 }}>Submit comment</button>
-                {err ? <p>{err}</p> : null}
+                {err ? <p className="error">{err}</p> : null}
             </div>
         )
     }

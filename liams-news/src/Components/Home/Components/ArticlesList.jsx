@@ -7,9 +7,11 @@ import { upvoteArticle, downvoteArticle } from '../../Votes/Votes';
 function ArticlesList({ sortBy, order }) {
     const [articlesList, setArticlesList] = useState([])
     const [loading, setLoading] = useState(false)
+    const [err, setErr] = useState(false)
 
     useEffect(() => {
         setLoading(true)
+        setErr(false)
 
         axios.get(`https://nc-news-liam.onrender.com/api/articles?sort_by=${sortBy.apiAccessKey}&order=${order}`)
             .then(function ({ data }) {
@@ -19,10 +21,19 @@ function ArticlesList({ sortBy, order }) {
                 setArticlesList(response)
                 setLoading(false)
             })
+            .catch(() => {
+                setLoading(false)
+                setErr(true)
+            })
     }, [sortBy, order])
 
 
     if (loading) return (<div><h1>Loading</h1></div>)
+
+    if(err) return ( <div>
+        <h1>Oops. Looks like the server might be down currently</h1>
+        <h2>Please try again later</h2>
+        </div> )
 
     return (
         <div className='article-list-div'>
@@ -44,7 +55,7 @@ function ArticlesList({ sortBy, order }) {
                         <Link to={`/article/${article.article_id}`}><button>Comments : {article.comment_count}</button></Link>
                         </div>
                         <div className='article-read'>
-                        <Link to={`/article/${article.article_id}`}><button>See</button></Link>
+                        <Link to={`/article/${article.article_id}`}><button>Read</button></Link>
                         </div>
                     </div>
                 })
