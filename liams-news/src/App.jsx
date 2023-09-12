@@ -12,6 +12,7 @@ import LoginSignup from "./Components/LoginSignup/LoginSignup";
 import Topics from "./Components/Topics/Topics";
 import TopicArticles from "./Components/TopicArticles/TopicArticles";
 import NotFound from "./Components/NotFound/NotFound"
+import Chat from "./Components/Chat/Chat"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/loginsignup" element={<LoginSignup />}></Route>
             <Route path="/topics" element={<Topics />}></Route>
             <Route path="/topicarticles/:topic" element={<TopicArticles />}></Route>
+            <Route path="/chat" element={<Chat />}></Route>
             <Route path="*"element={<NotFound/>} ></Route>
           </Routes>
         </Router>

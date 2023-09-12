@@ -12,6 +12,4 @@ export async function attemptLoginDatabase(loginAttempt) {
             if(err.message === "Network Error") return {errMsg:"Network Error"}
             else return {errMsg:"Wrong Login"}
         })
-
-
 }
